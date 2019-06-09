@@ -796,8 +796,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7, y: 33}
-  m_SizeDelta: {x: 160, y: 31.3}
+  m_AnchoredPosition: {x: 56.3, y: 30.65}
+  m_SizeDelta: {x: 294.8, y: 31.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &766815605
 MonoBehaviour:
@@ -1124,6 +1124,7 @@ MonoBehaviour:
   usernameField: {fileID: 982715582}
   passwordField: {fileID: 1939057598}
   positionField: {fileID: 67217523}
+  message_login: {fileID: 766815605}
   loginButton: {fileID: 1484550434}
   forgotpswButton: {fileID: 178338622}
 --- !u!1 &982715580

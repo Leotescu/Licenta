@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/login.unity
     guid: d4977edc01617fd42815c414a416d97d
-  - enabled: 1
+  - enabled: 0
     path: Assets/afterregister.unity
     guid: 7f2bf84000458ae47adde662142a7cac
   - enabled: 1

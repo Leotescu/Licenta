@@ -31,7 +31,7 @@ public class MainMenu : MonoBehaviour
             employeeLogged.text = "Please, log in, before this action";
         }
         else
-            UnityEngine.SceneManagement.SceneManager.LoadScene(5);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(4);
 
     }
 
@@ -47,6 +47,6 @@ public class MainMenu : MonoBehaviour
 
     public void GoToMyActivities()
     {
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(4);
     }
 }

@@ -11,7 +11,7 @@ public class Login : MonoBehaviour
     public InputField usernameField;
     public InputField passwordField;
     public InputField positionField;
-
+    public Text message_login;
     public Button loginButton;
     public Button forgotpswButton;
 
@@ -38,12 +38,13 @@ public class Login : MonoBehaviour
             DBManager.username = usernameField.text;
             DBManager.position = positionField.text;
             DBManager.tasks_solved = int.Parse(www.text.Split('\t')[1]);
+            
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
 
         }
         else
         {
-            Debug.Log("User login failed. Error #" + www.text);
+            message_login.text = "Error " + www.text;
         }
     }
 
@@ -54,7 +55,7 @@ public class Login : MonoBehaviour
 
     public void GoToForgotPassword()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(3);
     }
 
     public void VerifyInputs()

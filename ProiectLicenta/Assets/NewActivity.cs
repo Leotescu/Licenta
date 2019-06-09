@@ -11,7 +11,7 @@ public class NewActivity : MonoBehaviour
     public InputField deadline;
     public InputField description;
     public InputField username;
-
+    public static int counter_tasks = 0;
     public Button submit;
 
 
@@ -26,8 +26,8 @@ public class NewActivity : MonoBehaviour
     {
         if (checkFunction() == 1)
         {
-            message_text.text = "The task was added";
             StartCoroutine(NewActivity1());
+           // UnityEngine.SceneManagement.SceneManager.LoadScene(5);
         }
         else
         {
@@ -43,19 +43,31 @@ public class NewActivity : MonoBehaviour
         form.AddField("deadline", deadline.text);
         form.AddField("description", description.text);
         form.AddField("username", username.text);
+
+        
 #pragma warning disable CS0618 // Type or member is obsolete
         WWW www = new WWW("http://localhost/sqlconnect/task.php", form);
-
+        
+        
         yield return www;
 
         if (www.text == "0")
         {
-            Debug.Log("Task was added.");
-        }
+            message_text.text = "The task was added";
+        }   
         else
         {
-            Debug.Log("Task added failed. Error #" + www.text);
+            message_text.text = "Error: " + www.text;
         }
     }
 
+    
+
+    public void GoToMyActivities()
+    {
+        SceneManager.LoadScene(4);
     }
+
+
+
+}

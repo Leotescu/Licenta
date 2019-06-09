@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Registration : MonoBehaviour
 {
+      public Text register;
       public InputField usernameField;
       public InputField firstnameField;
       public InputField lastnameField;
@@ -34,20 +35,24 @@ public class Registration : MonoBehaviour
 
           yield return www;
 
-          if(www.text == "0")
-          {
-              Debug.Log("User created successfully.");
-              UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-          }
-          else
-          {
-              Debug.Log("User creation failed. Error #" + www.text);
-          }
+        if (www.text == "0")
+        {
+            register.text = "User created successfully.";
+        }
+        else
+        {
+            register.text = " Error: " + www.text;
+        }
       }
 
     public void GoToMainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void GoToLogIn()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public void VerifyInputs()
