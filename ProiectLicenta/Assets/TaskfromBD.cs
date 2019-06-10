@@ -7,6 +7,7 @@ public class TaskfromBD : MonoBehaviour
     public static string[] save_title = new string[200];
     public static string[] save_deadline = new string[200];
     public static string[] save_username = new string[200];
+    public static string[] save_status = new string[200];
     public static int counter_task = 0;
 
     // Start is called before the first frame update
@@ -28,7 +29,7 @@ public class TaskfromBD : MonoBehaviour
             {
                // Debug.Log(www.downloadHandler.text);
                 string[] words = www.downloadHandler.text.Split('*');
-
+                Debug.Log(words);
                 foreach (string word in words)
                 {
                     if (word.Length > 1)
@@ -37,6 +38,7 @@ public class TaskfromBD : MonoBehaviour
                         save_title[counter_task] = word1[0];
                         save_deadline[counter_task] = word1[1];
                         save_username[counter_task] = word1[2];
+                        save_status[counter_task] = word1[3];
                         counter_task++;
                     }
 }

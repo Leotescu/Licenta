@@ -148,7 +148,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.16862746, g: 0.56078434, b: 0.1254902, a: 0}
+  m_BackGroundColor: {r: 0.1254902, g: 0.56078434, b: 0.45490196, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -669,8 +669,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -160, y: 129.4}
-  m_SizeDelta: {x: 50, y: 37.9}
+  m_AnchoredPosition: {x: -153, y: 192}
+  m_SizeDelta: {x: 68, y: 57.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &426812659
 MonoBehaviour:
@@ -796,8 +796,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 56.3, y: 30.65}
-  m_SizeDelta: {x: 294.8, y: 31.3}
+  m_AnchoredPosition: {x: 63.500015, y: 30.65}
+  m_SizeDelta: {x: 243, y: 31.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &766815605
 MonoBehaviour:
@@ -812,7 +812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

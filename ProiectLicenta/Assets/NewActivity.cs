@@ -11,6 +11,7 @@ public class NewActivity : MonoBehaviour
     public InputField deadline;
     public InputField description;
     public InputField username;
+    public InputField status;
     public static int counter_tasks = 0;
     public Button submit;
 
@@ -43,8 +44,9 @@ public class NewActivity : MonoBehaviour
         form.AddField("deadline", deadline.text);
         form.AddField("description", description.text);
         form.AddField("username", username.text);
+        form.AddField("status", status.text);
 
-        
+
 #pragma warning disable CS0618 // Type or member is obsolete
         WWW www = new WWW("http://localhost/sqlconnect/task.php", form);
         

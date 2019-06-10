@@ -12,16 +12,105 @@ public class MyActivity : MonoBehaviour
     public Text countText;
     public ScrollRect scrollView;
     public RectTransform content;
-
+    public InputField username;
+    public InputField number_task_of_view;
+    int not_tasks = 0;
+    int not_username = 0;
+    int not_task_for_username = 0;
+    public Text message;
+   
     List<ExampleItemView> views = new List<ExampleItemView>();
 
+    public void check_inputs()
+    {
+        int valid_username = 0;
+        if(username.text =="")
+        {
+            if (int.Parse(number_task_of_view.text) > TaskfromBD.counter_task)
+            {
+                not_tasks = 1;
+            }
+            else
+                not_tasks = 0;
+        }
+        else
+        {
+            for(int i = 0; i < TaskfromBD.counter_task; i++)
+            {
+                if (TaskfromBD.save_username[i] == username.text)
+                    valid_username = 1;
+            }
+            if(valid_username == 0)
+            {
+                not_username = 1;
+            }
+            else
+            {
+                not_username = 0;
+            }
+            int nr_tasks_username = 0;
+            for(int i = 0; i < TaskfromBD.counter_task; i++)
+            {
+                if(TaskfromBD.save_username[i] == username.text)
+                {
+                    nr_tasks_username++;
+                }
+            }
+
+            if (int.Parse(number_task_of_view.text) > nr_tasks_username)
+            {
+                not_task_for_username = 1;
+            }
+            else
+                not_task_for_username = 0;
+        }
+
+    }
+
+    public void whenTakeTask(GameObject viewGameObject)
+    {
+        ExampleItemView view = new ExampleItemView(viewGameObject.transform);
+        view.status.text = "In progres";
+        TaskfromBD.save_status[0] = "In progres";
+    }
+
+    public void verify_inputs()
+    {
+        check_inputs();
+        message.text = "     List of Tasks";
+        if (not_tasks == 0 && not_username == 0 && not_task_for_username == 0)
+        {
+            UpdateItems();
+        }
+        else if(not_tasks == 1 && not_username == 1)
+        {
+            message.text = "     Incorect inputs";
+            not_tasks = 0;
+            not_username = 0;
+        }
+        else if(not_tasks == 1)
+        {
+            message.text = "    Incorect nr of task";
+            not_tasks = 0;
+        }
+        else if (not_username == 1)
+        {
+            message.text = "    Incorect username";
+            not_username = 0;
+        }
+        else if(not_task_for_username == 1)
+        {
+            message.text = "Too many tasks for " + username.text;
+            not_username = 0;
+        }
+    }
+    
     public void UpdateItems()
     {
-        int newCount;
-        int.TryParse(countText.text, out newCount);
-        StartCoroutine(FetchItemModels(newCount, results => OnReceivedNewModels(results)));
-        
-        
+            int newCount;
+            int.TryParse(countText.text, out newCount);
+            StartCoroutine(FetchItemModels(newCount, results => OnReceivedNewModels(results)));
+       
     }
 
     private void OnReceivedNewModels(ExampleItemModel[] models)
@@ -48,33 +137,61 @@ public class MyActivity : MonoBehaviour
     {
         ExampleItemView view = new ExampleItemView(viewGameObject.transform);
 
-        view.title.text = model.title;
-        view.deadline.text = model.deadline;
-        view.username.text = model.username;
-        view.status.text = model.status;
-
+            view.title.text = model.title;
+            view.deadline.text = model.deadline;
+            view.username.text = model.username;
+            view.status.text = model.status;
+     
         return view;
     }
 
     IEnumerator FetchItemModels(int count, System.Action<ExampleItemModel[]> onDone)
     {
         yield return new WaitForSeconds(0.1f);
-        
-
-      
         var result = new ExampleItemModel[count];
-        
-        for(int i = 0; i< count; i++)
+        var result1 = new ExampleItemModel[count];
+        if (username.text == "")
         {
-            result[i] = new ExampleItemModel();
+          
+                int i;
+                for (i = 0; i < count; i++)
+                {
+                    result[i] = new ExampleItemModel();
 
-            result[i].title = TaskfromBD.save_title[i];
-            result[i].deadline = TaskfromBD.save_deadline[i];
-            result[i].username = TaskfromBD.save_username[i];
-            result[i].status = "Assigned";
+                    result[i].title = TaskfromBD.save_title[i];
+                    result[i].deadline = TaskfromBD.save_deadline[i];
+                    result[i].username = TaskfromBD.save_username[i];
+                    result[i].status = "Assigned";
+               }
         }
+        else
+        {
+            
+                int nr_task_one_user = 0;
+                int k = 0;
+                while (nr_task_one_user < count)
+                {
+                    if (username.text == TaskfromBD.save_username[k])
+                    {
+                        result1[nr_task_one_user] = new ExampleItemModel();
 
-        onDone(result);
+                        result1[nr_task_one_user].title = TaskfromBD.save_title[k];
+                        result1[nr_task_one_user].deadline = TaskfromBD.save_deadline[k];
+                        result1[nr_task_one_user].username = TaskfromBD.save_username[k];
+                        result1[nr_task_one_user].status = "Assigned";
+                        nr_task_one_user++;
+                    }
+                    k++;
+                }
+        }
+        if (username.text == "")
+        {
+            onDone(result);
+        }
+        else
+        {
+            onDone(result1);
+        }      
     }
 
     public class ExampleItemView
@@ -83,8 +200,6 @@ public class MyActivity : MonoBehaviour
         public Text deadline;
         public Text username;
         public Text status;
-
-       
 
         public ExampleItemView(Transform rootView)
         {

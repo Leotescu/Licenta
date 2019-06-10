@@ -9,12 +9,14 @@ public class MainMenu : MonoBehaviour
     public Text employeeLogged;
     public Button logout;
 
+
     private void Start()
     {
         if(DBManager.LoggedIn)
         {
             employeeLogged.text = DBManager.username + ": " + DBManager.position; 
         }
+        
 
     }
 
