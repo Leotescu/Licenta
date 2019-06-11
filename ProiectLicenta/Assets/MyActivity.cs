@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using UnityEngine.Networking;
 
 public class MyActivity : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public class MyActivity : MonoBehaviour
     int not_task_for_username = 0;
     public Text message;
    
-    List<ExampleItemView> views = new List<ExampleItemView>();
+    public List<ExampleItemView> views = new List<ExampleItemView>();
 
     public void check_inputs()
     {
@@ -67,13 +67,6 @@ public class MyActivity : MonoBehaviour
 
     }
 
-    public void whenTakeTask(GameObject viewGameObject)
-    {
-        ExampleItemView view = new ExampleItemView(viewGameObject.transform);
-        view.status.text = "In progres";
-        TaskfromBD.save_status[0] = "In progres";
-    }
-
     public void verify_inputs()
     {
         check_inputs();
@@ -95,22 +88,22 @@ public class MyActivity : MonoBehaviour
         }
         else if (not_username == 1)
         {
-            message.text = "    Incorect username";
+            message.text = "Not tasks assigned/Incorect username";
             not_username = 0;
         }
         else if(not_task_for_username == 1)
         {
             message.text = "Too many tasks for " + username.text;
-            not_username = 0;
+            not_task_for_username = 0;
         }
     }
     
     public void UpdateItems()
     {
+            TaskfromBD.onStart = 1;
             int newCount;
             int.TryParse(countText.text, out newCount);
             StartCoroutine(FetchItemModels(newCount, results => OnReceivedNewModels(results)));
-       
     }
 
     private void OnReceivedNewModels(ExampleItemModel[] models)
@@ -130,6 +123,12 @@ public class MyActivity : MonoBehaviour
             var view = InitializeItemView(instance, model);
             views.Add(view);
             ++i;
+
+            instance.transform.Find("take").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                instance.transform.Find("status").GetComponent<Text>().text = "InProgress";
+                StartCoroutine(TaskfromBD.UpdateStatusTask("InProgress"));
+            });
         }
     }
 
@@ -150,6 +149,7 @@ public class MyActivity : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         var result = new ExampleItemModel[count];
         var result1 = new ExampleItemModel[count];
+      
         if (username.text == "")
         {
           
@@ -161,7 +161,7 @@ public class MyActivity : MonoBehaviour
                     result[i].title = TaskfromBD.save_title[i];
                     result[i].deadline = TaskfromBD.save_deadline[i];
                     result[i].username = TaskfromBD.save_username[i];
-                    result[i].status = "Assigned";
+                    result[i].status = TaskfromBD.save_status[i];
                }
         }
         else
@@ -178,7 +178,7 @@ public class MyActivity : MonoBehaviour
                         result1[nr_task_one_user].title = TaskfromBD.save_title[k];
                         result1[nr_task_one_user].deadline = TaskfromBD.save_deadline[k];
                         result1[nr_task_one_user].username = TaskfromBD.save_username[k];
-                        result1[nr_task_one_user].status = "Assigned";
+                        result1[nr_task_one_user].status = TaskfromBD.save_status[k];
                         nr_task_one_user++;
                     }
                     k++;
@@ -187,6 +187,7 @@ public class MyActivity : MonoBehaviour
         if (username.text == "")
         {
             onDone(result);
+
         }
         else
         {

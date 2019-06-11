@@ -9,11 +9,13 @@ public class TaskfromBD : MonoBehaviour
     public static string[] save_username = new string[200];
     public static string[] save_status = new string[200];
     public static int counter_task = 0;
-
+    public static int onStart = 0;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(GetDate());
+        if(onStart == 0)
+            StartCoroutine(GetDate());
+        
     }
 
     IEnumerator GetDate()
@@ -27,9 +29,8 @@ public class TaskfromBD : MonoBehaviour
             }
             else
             {
-               // Debug.Log(www.downloadHandler.text);
+                // Debug.Log(www.downloadHandler.text);
                 string[] words = www.downloadHandler.text.Split('*');
-                Debug.Log(words);
                 foreach (string word in words)
                 {
                     if (word.Length > 1)
@@ -44,6 +45,25 @@ public class TaskfromBD : MonoBehaviour
 }
             }
 
+        }
+    }
+
+    public static IEnumerator UpdateStatusTask(string status)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("status", status);
+
+        using (UnityWebRequest www = UnityWebRequest.Get("http://localhost/sqlconnect/update_status_task.php"))
+        {
+            yield return www.Send();
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log(www.downloadHandler.text);
+            }
         }
     }
 }
