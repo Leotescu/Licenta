@@ -13,12 +13,15 @@ public class TaskfromBD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(onStart == 0)
+        if (onStart == 0)
+        {
             StartCoroutine(GetDate());
+            onStart = 1;
+        }
         
     }
 
-    IEnumerator GetDate()
+    public static IEnumerator GetDate()
     {
         using (UnityWebRequest www = UnityWebRequest.Get("http://localhost/sqlconnect/select_task.php"))
         {
@@ -29,7 +32,6 @@ public class TaskfromBD : MonoBehaviour
             }
             else
             {
-                // Debug.Log(www.downloadHandler.text);
                 string[] words = www.downloadHandler.text.Split('*');
                 foreach (string word in words)
                 {
@@ -48,12 +50,14 @@ public class TaskfromBD : MonoBehaviour
         }
     }
 
-    public static IEnumerator UpdateStatusTask(string status)
+    public static IEnumerator UpdateStatusTask(string title, string status)
     {
         WWWForm form = new WWWForm();
+        form.AddField("title", title);
         form.AddField("status", status);
+        
 
-        using (UnityWebRequest www = UnityWebRequest.Get("http://localhost/sqlconnect/update_status_task.php"))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/sqlconnect/update_status_task.php",form))
         {
             yield return www.Send();
             if (www.isNetworkError || www.isHttpError)
@@ -66,4 +70,23 @@ public class TaskfromBD : MonoBehaviour
             }
         }
     }
+
+      public static IEnumerator DeleteStatusTask(string status)
+      {
+          WWWForm form = new WWWForm();
+          form.AddField("status", status);
+
+          using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/sqlconnect/delete_task.php", form))
+          {
+              yield return www.Send();
+              if (www.isNetworkError || www.isHttpError)
+              {
+                  Debug.Log(www.error);
+              }
+              else
+              {
+                  Debug.Log(www.downloadHandler.text);
+              }
+          }
+      } 
 }

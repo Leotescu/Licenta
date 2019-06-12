@@ -49,6 +49,7 @@ public class MainMenu : MonoBehaviour
 
     public void GoToMyActivities()
     {
+        TaskfromBD.onStart = 1;
         SceneManager.LoadScene(4);
     }
 }

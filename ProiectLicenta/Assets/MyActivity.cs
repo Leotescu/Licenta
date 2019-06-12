@@ -100,6 +100,7 @@ public class MyActivity : MonoBehaviour
     
     public void UpdateItems()
     {
+            
             TaskfromBD.onStart = 1;
             int newCount;
             int.TryParse(countText.text, out newCount);
@@ -122,15 +123,51 @@ public class MyActivity : MonoBehaviour
             instance.transform.SetParent(content, false);
             var view = InitializeItemView(instance, model);
             views.Add(view);
+            
+                instance.transform.Find("take").GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    if (instance.transform.Find("status").GetComponent<Text>().text != "Finish")
+                    {
+                        instance.transform.Find("status").GetComponent<Text>().text = "InProgress";
+                        for(int j = 0; j< TaskfromBD.save_status.Length; j++)
+                        {
+                            if(TaskfromBD.save_title[j] == instance.transform.Find("title").GetComponent<Text>().text)
+                            {
+                                TaskfromBD.save_status[j] = "InProgress";
+                            }
+                        }
+
+
+                        StartCoroutine(TaskfromBD.UpdateStatusTask(instance.transform.Find("title").GetComponent<Text>().text,
+                            instance.transform.Find("status").GetComponent<Text>().text));
+                    }
+                       
+            });
+            
             ++i;
 
-            instance.transform.Find("take").GetComponent<Button>().onClick.AddListener(() =>
-            {
-                instance.transform.Find("status").GetComponent<Text>().text = "InProgress";
-                StartCoroutine(TaskfromBD.UpdateStatusTask("InProgress"));
-            });
+              instance.transform.Find("finish").GetComponent<Button>().onClick.AddListener(() =>
+              {
+
+                  if (instance.transform.Find("status").GetComponent<Text>().text == "InProgress")
+                  {
+                      instance.transform.Find("status").GetComponent<Text>().text = "Finish";
+                      for (int j = 0; j < TaskfromBD.save_status.Length; j++)
+                      {
+                          if (TaskfromBD.save_title[j] == instance.transform.Find("title").GetComponent<Text>().text)
+                          {
+                              TaskfromBD.save_status[j] = "Finish";
+                          }
+                      }
+
+                      StartCoroutine(TaskfromBD.DeleteStatusTask("InProgress"));
+                  }
+              });  
+
         }
     }
+
+    
 
     ExampleItemView InitializeItemView(GameObject viewGameObject, ExampleItemModel model)
     {
@@ -149,7 +186,6 @@ public class MyActivity : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         var result = new ExampleItemModel[count];
         var result1 = new ExampleItemModel[count];
-      
         if (username.text == "")
         {
           

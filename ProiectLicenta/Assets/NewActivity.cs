@@ -27,6 +27,7 @@ public class NewActivity : MonoBehaviour
     {
         if (checkFunction() == 1)
         {
+            TaskfromBD.onStart = 1;
             StartCoroutine(NewActivity1());
            // UnityEngine.SceneManagement.SceneManager.LoadScene(5);
         }
@@ -67,6 +68,7 @@ public class NewActivity : MonoBehaviour
 
     public void GoToMyActivities()
     {
+        TaskfromBD.onStart = 1;
         SceneManager.LoadScene(4);
     }
 
