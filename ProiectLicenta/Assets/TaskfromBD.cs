@@ -88,5 +88,26 @@ public class TaskfromBD : MonoBehaviour
                   Debug.Log(www.downloadHandler.text);
               }
           }
-      } 
+      }
+
+    public static IEnumerator MoveATask(string title, string actual_username, string new_username)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("title", title);
+        form.AddField("actual_username", actual_username);
+        form.AddField("new_username", new_username);
+
+        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/sqlconnect/move_task.php", form))
+        {
+            yield return www.Send();
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log(www.downloadHandler.text);
+            }
+        }
+    }
 }

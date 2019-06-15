@@ -3,7 +3,7 @@ $con = mysqli_connect('localhost', 'root', 'root', 'mydatabase');
 
 	if(mysqli_connect_errno())
 	{
-		echo "1: Connection failed";
+		echo "Connection failed";
 		exit();
 	}
 
@@ -14,11 +14,11 @@ $con = mysqli_connect('localhost', 'root', 'root', 'mydatabase');
 	$namecheckquery = "SELECT username, position, salt, hash, tasks_solved FROM employees WHERE username = '" . $username . "'
 	AND position = '" . $position . "'; ";
 
-	$namecheck = mysqli_query($con, $namecheckquery) or die("2: Name check query failed");
+	$namecheck = mysqli_query($con, $namecheckquery) or die("Name check query failed");
 
 	if(mysqli_num_rows($namecheck) != 1)
 	{
-		echo "5: Either no user with name, or more than one";
+		echo "User not exist";
 		exit();
 	}
 
@@ -29,7 +29,7 @@ $con = mysqli_connect('localhost', 'root', 'root', 'mydatabase');
 	$loginhash = crypt($password, $salt);
 	if ($hash != $loginhash)
 	{
-		echo "6: Incorrect password";
+		echo "Incorrect password";
 		exit();
 	}
 

@@ -176,7 +176,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1649,7 +1649,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1821,7 +1821,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1095570153}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1274228597}
+        m_MethodName: GoToMoveaTask
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1095570153
@@ -1875,6 +1886,7 @@ GameObject:
   - component: {fileID: 1274228594}
   - component: {fileID: 1274228597}
   - component: {fileID: 1274228598}
+  - component: {fileID: 1274228599}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2004,6 +2016,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d05071af2cbd984ea7f5df098f8ee07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1274228599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274228592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e084f1caa9d6182408589d11372bb449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  countText: {fileID: 0}
+  scrollView: {fileID: 0}
+  content: {fileID: 0}
+  username: {fileID: 0}
+  number_task_of_view: {fileID: 0}
+  message: {fileID: 0}
 --- !u!1 &1291293757
 GameObject:
   m_ObjectHideFlags: 0

@@ -54,14 +54,7 @@ public class NewActivity : MonoBehaviour
         
         yield return www;
 
-        if (www.text == "0")
-        {
-            message_text.text = "The task was added";
-        }   
-        else
-        {
-            message_text.text = "Error: " + www.text;
-        }
+       
     }
 
     

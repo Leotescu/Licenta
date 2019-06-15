@@ -267,4 +267,9 @@ public class MyActivity : MonoBehaviour
         SceneManager.LoadScene(5);
     }
 
+    public void GoToMoveaTask()
+    {
+        SceneManager.LoadScene(6);
+    }
+
 }

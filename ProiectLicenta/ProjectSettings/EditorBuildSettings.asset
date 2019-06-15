@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/login.unity
     guid: d4977edc01617fd42815c414a416d97d
   - enabled: 0
-    path: Assets/afterregister.unity
+    path: 
     guid: 7f2bf84000458ae47adde662142a7cac
   - enabled: 1
     path: Assets/forgotpassword.unity
@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/newactivity.unity
     guid: 000dd5d28b9c4a046914836a6597e89a
+  - enabled: 1
+    path: Assets/MoveTask.unity
+    guid: 1080e6680692e43428fbe4428d1612c2
   m_configObjects: {}

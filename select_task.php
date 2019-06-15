@@ -16,8 +16,6 @@ $con = mysqli_connect('localhost', 'root', 'root', 'mydatabase');
 		while($row = $result->fetch_assoc()){
 			echo  $row["title"]. " "  .$row["deadline"]. " " .$row["username"].  " " .$row["status"]. "*";
 		}
-	} else {
-		echo "0 result";
-	}
+	} 
 	
 ?>

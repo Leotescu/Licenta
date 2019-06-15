@@ -17,7 +17,7 @@ $con = mysqli_connect('localhost', 'root', 'root', 'mydatabase');
 	$namecheckquery = "SELECT title FROM tasks WHERE title =
 	'" . $title . "';";
 
-	$namecheck = mysqli_query($con, $namecheckquery) or die("2: Name check query failed");
+	$namecheck = mysqli_query($con, $namecheckquery) or die("Name check failed");
 
 	if(mysqli_num_rows($namecheck) > 0)
 	{
@@ -37,7 +37,7 @@ $con = mysqli_connect('localhost', 'root', 'root', 'mydatabase');
 	$namecheckexistquery = "SELECT username FROM employees WHERE username = 
 	'" . $username . "';";
 
-	$namecheckexist = mysqli_query($con, $namecheckexistquery) or die("2: Username check query failed");
+	$namecheckexist = mysqli_query($con, $namecheckexistquery) or die("2: Username check failed");
 
 	if(mysqli_num_rows($namecheckexist) != 1)
 	{
@@ -46,7 +46,7 @@ $con = mysqli_connect('localhost', 'root', 'root', 'mydatabase');
 	}
 
 	$insertuserquery = "INSERT INTO tasks (id, title, deadline, description, username, status ) VALUES (NULL, '" . $title . "', '" . $deadline . "', '" . $description . "', '" . $username . "', '" . $status . "');";
-	mysqli_query($con, $insertuserquery) or die("Insert task query failed");
+	mysqli_query($con, $insertuserquery) or die("Insert task failed");
 
 	echo "0";
 	
