@@ -7,15 +7,16 @@ $con = mysqli_connect('localhost', 'root', 'root', 'mydatabase');
 		exit();
 	}
 	
-	$selectquery = "SELECT  title, username, deadline, status, description FROM tasks";
+	$selectquery = "SELECT username, position, tasks_solved FROM employees";
 
 	$result = $con->query($selectquery);
 
 	if($result->num_rows > 0) {
 
 		while($row = $result->fetch_assoc()){
-			echo  $row["title"]. "$"  .$row["deadline"]. "$" .$row["username"].  "$" .$row["status"]. "$" .$row["description"]. "*";
+			echo  $row["username"]. "$" .$row["position"]. "$"  .$row["tasks_solved"]. "*";
 		}
 	} 
+
 	
 ?>
